@@ -60,7 +60,7 @@ Configuration:
 
 Notes:
 ------
-- The bot only affects active threads; archived threads are skipped.
+- The bot only affects active posts; archived ones are skipped.
 - Make sure GitHub Actions workflow has enough runtime to allow message deletion.
 - All bump messages are automatically removed, so the forum stays clean.
 
