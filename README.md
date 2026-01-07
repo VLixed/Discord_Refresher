@@ -22,15 +22,30 @@ Requirements:
 
 Setup Instructions:
 ------------------
-1. Add the bot to your Discord server and ensure it has the required permissions.
-2. Copy the bot token and forum channel ID.
-3. Create a GitHub repository and add the following files:
-   - bump.py          (the Python script)
-   - .github/workflows/weekly_bump.yml  (the GitHub Actions workflow)
-4. Add repository secrets:
-   - DISCORD_TOKEN : your bot token
-   - CHANNEL_ID    : numeric ID of your forum channel
-5. Run the workflow via GitHub Actions which will run weekly according to the cron schedule in weekly_bump.yml.
+1. **Copy the repository**  
+   - Fork or clone this repository to your own GitHub account.  
+   - This will give you your own copy of the code and workflow.
+
+2. **Create your own Discord bot**  
+   - Add the bot to your server and ensure it has the required permissions:  
+     - Send Messages ✅  
+     - Manage Messages ✅
+     - View Channels ✅
+   - Copy the bot token and the forum channel ID.
+
+3. **Configure your repository secrets**  
+   - Go to your forked repository → Settings → Secrets and Variables → Actions  
+   - Add the following secrets:  
+     - `DISCORD_TOKEN` : your bot token  
+     - `CHANNEL_ID`    : numeric ID of your forum channel
+
+4. **Adjust workflow if needed**  
+   - The workflow file `.github/workflows/weekly_bump.yml` is already set to run weekly.  
+   - You can modify the cron schedule or trigger it manually via GitHub Actions.
+
+5. **Run the workflow**  
+   - GitHub Actions will run the bot according to your schedule, bump all threads, and delete bump messages automatically.  
+
 
 Configuration:
 --------------
