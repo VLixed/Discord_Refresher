@@ -2,11 +2,12 @@ import discord
 from discord.ext import tasks, commands
 import os
 
-TOKEN = os.getenv("DISCORD_TOKEN")          # your bot token (GitHub secret)
-CHANNEL_ID = int(os.getenv("CHANNEL_ID"))   # forum channel ID
+TOKEN = os.getenv("DISCORD_TOKEN")          # Bot token
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))   # Forum channel ID
 
 intents = discord.Intents.default()
 intents.messages = True
+intents.guilds = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -18,8 +19,15 @@ async def on_ready():
 @tasks.loop(minutes=5)  # runs every 5 minutes
 async def bump_forum():
     channel = bot.get_channel(CHANNEL_ID)
-    if channel:
-        post = await channel.create_thread(name="Weekly bump", type=discord.ChannelType.public_thread, message=None)
-        await post.send("Bump!")  # the content of the post
-        # optional: delete after some time
-        # await post.delete(delay=604800)  # deletes after 1 week (seconds)
+    if not channel:
+        print("Channel not found")
+        return
+
+    # Iterate over the last 5 threads/posts
+    async for thread in channel.threads:
+        if thread.archived:
+            continue  # skip archived threads
+        msg = await thread.send("Bump!")       # send message to the thread
+        await msg.delete(delay=1)              # delete after 1 second
+
+bot.run(TOKEN)
