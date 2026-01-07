@@ -1,12 +1,12 @@
-name: Discord Forum Bump
+name: Weekly Forum Bump
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # every 5 minutes
+    - cron: '0 12 * * 1'  # every Monday at 12:00 UTC
   workflow_dispatch:      # allows manual run
 
 jobs:
-  run-bot:
+  bump:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +16,7 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: pip install discord.py
-      - name: Run bot
+      - name: Run bump script
         run: python bump.py
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
