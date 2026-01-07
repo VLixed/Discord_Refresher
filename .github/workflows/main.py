@@ -20,4 +20,3 @@ jobs:
         run: python bump.py
         env:
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-          API_KEY: ${{ secrets.API_KEY }}
